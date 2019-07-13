@@ -39,10 +39,25 @@ class PostController extends Controller
     {
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $posts = post::find() ->asArray()->all();
 
-        return $this->render('index', [
+
+        return $this->render('postview', [
+            'posts' => $posts,
+        ]);
+       /* return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]); */
+    }
+
+    public function actionAuthor($author)
+    {
+        $posts = post::find()->where(['author' => $author])->all();
+
+
+        return $this->render('postview', [
+            'posts' => $posts,
         ]);
     }
 
@@ -86,7 +101,7 @@ class PostController extends Controller
             ]);
 
         } else {
-            return $this->redirect(['post/index']);
+            throw new \yii\web\HttpException(403,'Oops. you can not create post.');
         }
 
     }

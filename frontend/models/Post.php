@@ -30,9 +30,9 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text', 'user_id', 'author'], 'required'],
+            [['title','text', 'user_id', 'author'], 'required'],
             [['user_id'], 'integer'],
-            [['text'], 'string', 'max' => 500],
+            [['text'], 'string', 'max' => 5000],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -47,6 +47,7 @@ class Post extends \yii\db\ActiveRecord
             'text' => 'Text',
             'user_id' => 'User ID',
             'author' => 'author',
+            'title' => 'Title'
         ];
     }
 

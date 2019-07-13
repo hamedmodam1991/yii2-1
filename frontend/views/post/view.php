@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
 
-$this->title = $model->id;
+$this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -14,6 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="post-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <p><?= Html::encode($model->text) ?></p>
+    <a href=<?= 'author?author=' . $model->author; ?>>
+        <h4><?= Html::encode($model->author) ?></h4>
+    </a>
+    <h5><?= Html::encode($model->created_at) ?></h5>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -26,14 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'text',
-            'user_id',
-            'author',
-        ],
-    ]) ?>
+
+    <!-- DetailView::widget([
+          'model' => $model,
+          'attributes' => [
+              'id',
+              'text',
+              'user_id',
+              'author',
+          ],
+      ]) -->
 
 </div>
